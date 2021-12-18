@@ -7,10 +7,19 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let amount = parseInt(count);
+
+    if (amount < 0) {
+      amount = 1;
+    } else if (amount > data.length) {
+      amount = data.length;
+    }
+
+    setText(data.slice(0, amount));
   };
 
   return (
-    <section className="section-container">
+    <section className="section-center">
       <h3>tired of the boring lorem ipsum?</h3>
       <form action="" className="lorem-form" onSubmit={handleSubmit}>
         <label htmlFor="amount">paragraphs:</label>
@@ -25,13 +34,11 @@ function App() {
           generate
         </button>
       </form>
+
       <article className="lorem-text">
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, quis?
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, quis?
-        </p>
+        {text.map((item, index) => {
+          return <p key={index}>{item}</p>;
+        })}
       </article>
     </section>
   );
